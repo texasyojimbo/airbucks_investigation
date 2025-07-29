@@ -53,7 +53,7 @@ Second section
 
 For example, "Houston" (row 6 of section 2) has these values:
 
-	0x48, 0x6F, 0x75, 0x73, 0x74, 0x6F, 0x6E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+  0x48, 0x6F, 0x75, 0x73, 0x74, 0x6F, 0x6E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
   0x34, 0x00, 
   0x45, 0x00, 
   0x37, 
@@ -76,18 +76,52 @@ Third section
 ** 1 byte indicating which airline/player the aircraft belongs to (01, 02, 03 or 04).
 ** 2 bytes representing a 16-bit integer (l.e.) indicating the current "longitude" of the aircraft.
 ** 2 bytes representing a 16-bit integer (l.e.) indicating the current "latitude" of the aircraft.
-** 1 byte representing a 8-bit integer (l.e.), indicating the index of the city to which the aircraft is en route (i.e. "2C" is equal to 44 in decimal; in SAMPLE.AIR SL0 has 44 but is going to Godthab, the 43rd city). Note index appears to start at 2, not zero or 1.
+** 1 byte representing a 8-bit integer (l.e.), indicating the index of the city to which the aircraft is en route (i.e. "2C" is equal to 44 in decimal; in SAMPLE.AIR SL0 has 44 but is going to Godthab, the 43rd city). Note index for cities appears to start at 2, not zero or 1. "01" represents "In Service."
 ** 2 bytes representing a 16-bit integer (l.e>) , indicating the speed of the aircraft in knots.
 ** 1 byte, representing an 8-bit integer (l.e.), indicating the aircraft model (00 for DC-3, 01 for DC-4, 02 for DC-6, 03 for Viscount, etc.).
 ** 2 bytes, representing a 16-bit integer (l.e.), indicating the year the aircraft was purchased (e.g. "9F 07" for 1951).
 ** 1 byte, representing an 8-bit integer (l.e.), indicating the percentage of space for seating first-class passengers (0 to 100 in increments of 10, for example, "1E" for 30 percent).
 ** 1 byte, representing an 8-bit integer (l.e.), indicating the percentage of space for economy/second-class passengers (0 to 100 in increments of 10, for example, "3C" for 60 percent).
 ** 1 byte, representing an 8-bit integer (l.e.), indicating the percentage of space for cargo (0 to 100 in increments of 10, for example, "0A" for 10 percent).
-** 4 bytes, representing a 32-bit integer (l.e.), indicating the revenue from first-class passengers (e.g., "DF 14 00 00" is $5,343).
-** 4 bytes, representing a 32-bit integer (l.e.), indicating the revenue from economy passengers.
-** 4 bytes, representing a 32-bit integer (l.e.), indicating the revenue from cargo.
-** 4 bytes, representing a 32-bit integer (l.e.), indicating what appears to be half of the expenses of the flight. For example, in SAMPLE.AIR, TAC1 had "6D 25 00 00" which comes to 9581 in decimal; it shows costs of $19,162 in-game (exactly twice of 9,581).
+** 4 bytes, representing a 32-bit integer (l.e.), indicating the one-way revenue from first-class passengers (e.g., "DF 14 00 00" is $5,343).
+** 4 bytes, representing a 32-bit integer (l.e.), indicating the one-way revenue from economy passengers on its current leg.
+** 4 bytes, representing a 32-bit integer (l.e.), indicating the one-way revenue from cargo on its current leg.
+** 4 bytes, representing a 32-bit integer (l.e.), indicating the one-way costs/expenses of the flight. For example, in SAMPLE.AIR, TAC1 had "6D 25 00 00" which comes to 9581 in decimal; it shows costs of $19,162 in-game for total costs (exactly twice of $9,581, because it has two legs).
 ** 1 byte, representing an 8-bit integer (l.e.) indicating the service level of the aircraft.
 ** 2 byte, representing a 16-bit integer (l.e.), indicating the index of the route. The index appears to be off by one, so for example FBI3 in SAMPLE.AIR is on route #81 but has "52 00" or 82 in decimal.
-** 1 byte, appears to be a boolean, but not clear what it represents.
+** 1 byte, appears to be a boolean or an 8-bit integer, but not clear what it represents. It likely is either some kind of maintenance flag or indicates the leg of the route it is currently on. In SAMPLE.AIR all the values are either 00 or 01 but that doesn't mean those are the only possible values.
 ** 4 bytes, representing the original purchase price of the aircraft, for example, "E4 79 05 00" represents the original purchase price of $358,884 for a DC-6 in 1951.
+
+So for example:
+
+	// Offset 0x00000E90 to 0x00000EB5
+	0x01, 
+	0x7E, 0x00, 
+	0x1F, 0x00, 
+	0x2C, 
+	0x3B, 0x01, 
+	0x02, 
+	0x9F, 0x07, 
+	0x1E, 
+	0x3C, 
+	0x0A, 
+	0x3C, 0x0A, 0x00, 0x00, 
+	0xCF, 0x0F, 0x00, 0x00, 
+	0x1C, 0x02, 0x00, 0x00, 
+	0xD1, 0x13, 0x00, 0x00, 
+	0x04, 
+	0x01, 0x00, 
+	0x01, 
+	0xE4, 0x79, 0x05, 0x00
+
+Would be: Airline #1 | 126 | 31 | 44 (Godthab) | 315 kts | DC-6 | 1951 | 30% | 60% | 10% | $2,620 | $4,047 | $540 | $5,073 | 4 | 1 | 0? | $358,884
+
+This is followed by the
+
+================
+Fourth section
+================
+* Starts at 0x000049F0
+* Consists of:
+** Two bytes, representing a 16-bit integer (l.e.), storing the current month (1-12).
+** Two bytes, representing a 16-bit integer (l.e.), storing the current year (example in SAMPLE.AIR: "A1 07" is 1953).
