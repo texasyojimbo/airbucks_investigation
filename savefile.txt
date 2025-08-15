@@ -269,3 +269,7 @@ Fourth section
 *** Hex 0A for transfer to savings
 ** 4 byte (32-bit integer) for the amount.
 * This requires further investigation; rows seem to be written in circular queue (in SAMPLE.AIR, for September 1953 it seems to be July, August, September... and then back to June; this would allow oldest data to be constantly overwritten and replaced with new data). 
+
+--- At 0x0000DFEA there are four blocks of 16 bytes representing the names of the airlines in ASCII characters.
+--- At 0x0000E02A there are four blocks of 4 bytes representing the code (SL, TAC, EA, FBI) of the four airlines in ASCII characters.
+--- The last part of the file has a large amount of repeating data (starting at around 0x0000E1E3). Based on the amount, I suspect it has to do with routes.
