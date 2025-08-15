@@ -231,6 +231,12 @@ Fourth section
 ** Four rows of 160 bytes each, each row representing one of the four airlines.
 ** The 160 bytes are divided into 4 byte blocks (each representing a 32-bit integer) that represents 1/10th of the annual company valuation (starting in 1946, ending in 1985). Note that the number displayed on screen is the maximum value of all the airlines (value stored in save file, multiplied by 10).
 
+- - - - - - 
+* Start at 0x000051BC
+* Consists of:
+* This is the checking account balance (current) for each airline.
+* There are four rows (one for each airline), with each row being 4 bytes (32-bit integer).
+
 - - - - - -
 * Start at 0x0000D66F
 * This is advertising spend to date (year-to-date) for each airline.
