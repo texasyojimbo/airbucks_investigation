@@ -231,6 +231,21 @@ Fourth section
 ** Four rows of 160 bytes each, each row representing one of the four airlines.
 ** The 160 bytes are divided into 4 byte blocks (each representing a 32-bit integer) that represents 1/10th of the annual company valuation (starting in 1946, ending in 1985). Note that the number displayed on screen is the maximum value of all the airlines (value stored in save file, multiplied by 10).
 
+- - - - - -
+* Start at 0x0000D66F
+* This is advertising spend to date (year-to-date) for each airline.
+* There are four rows (one for each airline), with each row being 4 bytes (32-bit integer).
+
+- - - - - -
+* Start at 0x0000D68F
+* This is advertising slogans for each airline.
+* There are four rows (one for each airline), with each row being 21 bytes. Data is ASCII characters.
+
+- - - - - -
+* Start at 0x0000D6E3
+* This is advertising annual spend for each airline.
+* There are four rows (one for each airline), with each row being 4 bytes (32-bit integer).
+
 - - - - - - 
 * Start at 0x0000D729
 * This appears to be a bunch of data used to construct the register (about 3 months worth of past purchase expenses, the last 60 purchases).
