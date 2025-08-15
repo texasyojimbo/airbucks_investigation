@@ -125,3 +125,126 @@ Fourth section
 * Consists of:
 ** Two bytes, representing a 16-bit integer (l.e.), storing the current month (1-12).
 ** Two bytes, representing a 16-bit integer (l.e.), storing the current year (example in SAMPLE.AIR: "A1 07" is 1953).
+
+- - - - - - 
+* Starts at 0x0000494F
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the first-class fares income, year-to-date, for each airline. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+* This is followed by another 16 bytes (probably four rows, each for an airline), with relatively small numbers in it. It is likely that this is some kind of month-to-date adjustment.
+
+- - - - - - 
+* Starts at 0x00004A14
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the economy-class fares income, year-to-date, for each airline. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+* This is followed by another 16 bytes (probably four rows, each for an airline), with relatively small numbers in it. It is likely that this is some kind of month-to-date adjustment.
+
+- - - - - - 
+* Starts at 0x00004A34
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the cargo fares income, year-to-date, for each airline. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+* This is followed by another 16 bytes (probably four rows, each for an airline), with relatively small numbers in it. It is likely that this is some kind of month-to-date adjustment.
+* This is then followed by 48 bytes (twelve groups of 4 blocks) that probably represent plane sales, bank loans, and investor income for each airline. In SAMPLE.AIR these values are all zeroes.
+
+- - - - - - 
+* Starts at 0x00004A94
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the landing rights purchase expenses for each airline, year-to-date. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+* This is followed by 16 bytes (4 x 4 bytes) that are all zeroes in SAMPLE.AIR, probably representing one of the expense lines.
+
+- - - - - - 
+* Starts at 0x00004AB4
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the new plane purchase expenses for each airline, year-to-date. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+* This is followed by 32 bytes (8 x 4 bytes) that are all zeroes in SAMPLE.AIR, probably representing two of the expense lines. The first group of 16 bytes is likely represents bank interest, and the second likely represents tax-investors.
+
+- - - - - - 
+* Starts at 0x00004AE4
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the first-class fares for each airline, for the previous year. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+
+- - - - - - 
+* Starts at 0x00004AF4
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the economy fares for each airline, for the previous year. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+
+- - - - - - 
+* Starts at 0x00004B04
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the cargo fares for each airline, for the previous year. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+* This is followed by an additional 48 bytes (twelve groups of 4 bytes each), that likely represent plane sales, bank loan, and investor incomes for each of the 4 airlines.
+
+- - - - - - 
+* Starts at 0x00004B44
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the fuel-staff-ads expenses for each airline, for the previous year. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+
+- - - - - - 
+* Starts at 0x00004B54
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the landing rights purchases expenses for each airline, for the previous year. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+* This is followed by an additional 16 bytes (4x4) of zeroes in SAMPLE.AIR, probably representing an expense line (probably maintenance).
+
+- - - - - - 
+* Starts at 0x00004B74
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the new plane purchases expenses for each airline, for the previous year. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+* This is followed by an additional 16 bytes (4x4) of zeroes in SAMPLE.AIR, probably representing an expense line (probably bank interest).
+
+- - - - - - 
+* Starts at 0x00004B94
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the tax-investors expenses for each airline, for the previous year. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+
+- - - - - - 
+* Starts at 0x00004B54
+* Consists of:
+** Four rows of 4 bytes each, each row representing one of the four airlines
+** The 4 bytes are each 32-bit integers representing 1/10th of the landing rights purchases expenses for each airline, for the previous year. This is shown on the balance sheet. The number displayed on screen is this value multiplied by 10 (the use of a 32-bit integer seems to be to save space).
+
+- - - - - - 
+* Starts at 0x00004BA4
+* Consists of:
+** Four rows of 48 bytes each, each row representing one of the four airlines.
+** The 48 bytes are divided into 4 byte blocks (each representing a 32-bit integer) that represents 1/10th of the monthly fares income (over the past 12 months). Note that the number displayed on screen is the maximum value of all the airlines (value stored in save file, multiplied by 10). This appears to not use a circular queue; last/most-recent month is always in last place.
+
+- - - - - - 
+* Starts at 0x00004C64
+* Consists of:
+** Four rows of 160 bytes each, each row representing one of the four airlines.
+** The 160 bytes are divided into 4 byte blocks (each representing a 32-bit integer) that represents 1/10th of the annual fares income (starting in 1946, ending in 1985). Note that the number displayed on screen is the maximum value of all the airlines (value stored in save file, multiplied by 10).
+
+- - - - - - 
+* Start at 0x00004EE4
+* Consists of:
+** Four rows of 160 bytes each, each row representing one of the four airlines.
+** The 160 bytes are divided into 4 byte blocks (each representing a 32-bit integer) that represents 1/10th of the annual company valuation (starting in 1946, ending in 1985). Note that the number displayed on screen is the maximum value of all the airlines (value stored in save file, multiplied by 10).
+
+- - - - - - 
+* Start at 0x0000D729
+* This appears to be a bunch of data used to construct the register (about 3 months worth of past purchase expenses, the last 60 purchases).
+* Appears to be 9 bytes:
+** 2 bytes (16-bit integer) for the transaction number.
+** 1 byte (8-bit integer) for the month
+** 1 byte (8-bit integer) for the day
+** 1 byte (8-bit integer) for some kind of type code
+*** Hex 04 for fuel purchase
+*** Hex 05 for new plane
+*** Hex 09 for site purchase
+*** Hex 20 for ticket fares
+*** Hex 02 for payroll
+*** Hex 01 for advertising
+*** Hex 0A for transfer to savings
+** 4 byte (32-bit integer) for the amount.
+* This requires further investigation; rows seem to be written in circular queue (in SAMPLE.AIR, for September 1953 it seems to be July, August, September... and then back to June; this would allow oldest data to be constantly overwritten and replaced with new data). 
